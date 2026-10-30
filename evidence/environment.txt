@@ -1,0 +1,7 @@
+Date: 2026-10-26T18:22:46-04:00
+Architecture: x86_64
+Repository commit: 6f4b4190d773c9a50330002ef54a1efaf9bc47e5
+
+Git status:
+?? evidence/
+?? root-stage/
